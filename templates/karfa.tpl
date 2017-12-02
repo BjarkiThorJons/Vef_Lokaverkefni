@@ -16,8 +16,10 @@
 	%end
 	%end
 	<p>Samtals: {{verd}}</p>
+	<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
 	<form action="/">
 		<input type="submit" name="submit" value="borga">
 	</form>
+	</a>
 </body>
 </html>
