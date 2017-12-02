@@ -1,0 +1,21 @@
+body {
+	text-align: center;
+	background-color: #2B2B2B;
+	color: red;
+	font-size: 35px;
+}
+a {
+	color: hotpink;
+	text-decoration: none;
+}
+a:hover {
+	color: white;
+}
+input {
+	text-align: center;
+	background-color: #2B2B2B;
+	color: red;
+	border-color: red;
+	font-size: 25px;
+	border-radius: 25px;
+}
