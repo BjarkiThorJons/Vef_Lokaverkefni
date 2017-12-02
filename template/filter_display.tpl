@@ -2,16 +2,10 @@
 <html>
 <head>
 	<title>{{posts[0]["hopur"]}}</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-	<form action="/karfa" method="post">
-		<input type="submit" name="submit" value="fara í körfu">
-	</form>
-	<form action = "/check", method="post">
-		<h2>Leita með skráningarnúmeri</h2>
-		<input type="text" name="search">
-		<input type="submit" name="check" value="Leita">
-	</form>
+	% include('template/header.tpl')
 	% for x in posts:
 
 		<a href="/{{ x['link'] }}"><img src='myndir/{{ x["myndir"] }}'></a>

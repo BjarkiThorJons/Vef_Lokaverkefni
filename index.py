@@ -19,7 +19,13 @@ for i in range(numrows):
         users[row[0]]=row[1]
 @route("/")
 def index():
+    return template("template/index.tpl", posts=vorur)
+
+
+@route("/coolkrakki")
+def logs():
     return template("templates_login/index.tpl")
+
 @route('/login' ,method="POST")
 def login():
     cursor = db.cursor()
@@ -127,7 +133,6 @@ def d():
         fjoldi=int(fjoldi)*-1
     session[vara]=session.get(vara,0)+int(fjoldi)
     session.save()
-    print(session)
     for x in vorur:
         if x["nafn"]==vara:
             linkurinn=x["link"]
@@ -142,11 +147,12 @@ def karfa():
         for y in vorur:
             if x==y["nafn"]:
                 hlutur = {}
-                hlutur[x] = session[x]
+                verd=session[x]*y["verð"]
+                hlutur[x] = {"fjoldi":session[x],"verd":verd}
                 karfan.append(hlutur)
-                print(x)
-                print(session[x])
-    print(karfan)
+    for x in karfan:
+        for y in x:
+            print(x[y]["verd"])
     return template('templates/karfa.tpl',posts=karfan)
 
 

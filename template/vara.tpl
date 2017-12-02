@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<title>{{posts["nafn"]}}</title>
 </head>
 <body>
+		% include('template/header.tpl')
 	<img src="myndir/{{posts['myndir']}}">
 	<h2>{{posts["nafn"]}}</h2>
-	<h2>{{posts["verð"]}}</h2>
+	<h2>Verð: {{posts["verð"]}}</h2>
 	<h2>{{posts["lysing"]}}</h2>
 	<form action="/rsadea" method="post">
 		<input type="hidden" name="vara" value="{{posts['nafn']}}">
