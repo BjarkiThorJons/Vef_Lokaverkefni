@@ -62,6 +62,12 @@ for i in range(numrows):
         vara["hopur"] = row[2]
         vara["lysing"] = row[3]
         vara["myndir"] = row[4]
+        link=""
+        for x in vara["nafn"]:
+            if x==" ":
+                x="-"
+            link+=x.lower()
+        vara["link"]=link
         vorur.append(vara)
         '''vorur[row[0]] = vara'''
 
@@ -98,7 +104,11 @@ def check():
 
     return template("template/results.tpl", posts = leita)
 
-
+@route("/<vara>")
+def vara(vara):
+    for x in vorur:
+        if vara==x["link"]:
+            return template("template/vara.tpl",posts=x)
 
 @route('/myndir/<filename>')
 def server_static(filename):

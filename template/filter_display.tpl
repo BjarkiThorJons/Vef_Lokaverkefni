@@ -11,7 +11,7 @@
 	</form>
 	% for x in posts:
 
-		<img src='myndir/{{ x["myndir"] }}'>
+		<a href="/{{ x['link'] }}"><img src='myndir/{{ x["myndir"] }}'></a>
 		<p>{{ x["nafn"] }}</p>
 		<p>Verð: {{ x["verð"] }}</p>
 	%end
