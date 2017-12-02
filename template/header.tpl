@@ -1,8 +1,10 @@
 <header>
 	<a href="/">Forsíða</a>
-	<a href="/coolkrakki">LOGIN/SIGNUP</a>
+	<a href="/coolkrakki">LOGIN/SIGNUP</a><br>
 	<a href="/skjakort">Skjákort</a>
 	<a href="/turnkassar">Turnkassar</a>
+	<a href="/orgjorvi">Örgjorvar</a>
+	<a href="/modurbord">Móðurborð</a>
 	<form action = "/check", method="post">
 		<h2>Leita</h2>
 		<input type="text" name="search">

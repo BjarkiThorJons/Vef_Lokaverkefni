@@ -102,6 +102,22 @@ def skjakort():
            val.append(x)
     return template("template/filter_display.tpl", posts = val)
 
+@route("/orgjorvi")
+def filter():
+    val = []
+    for x in vorur:
+        if x["hopur"] == "orgjorvi":
+           val.append(x)
+    return template("template/filter_display.tpl", posts = val)
+
+@route("/modurbord")
+def skjakort():
+    val = []
+    for x in vorur:
+        if x["hopur"] == "modurbord":
+           val.append(x)
+    return template("template/filter_display.tpl", posts = val)
+
 @route("/check", method="POST")
 def check():
     global skraning
