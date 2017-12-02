@@ -1,6 +1,7 @@
 from bottle import *
 from pymysql import *
 from beaker.middleware import SessionMiddleware
+from sys import argv
 db=Connect(host="tsuts.tskoli.is",user="0207002620",password="snotra2000",db="0207002620_vef_lokaverkefni")
 cursor=db.cursor()
 cursor.execute("select * from notendur")
@@ -163,4 +164,4 @@ def server_static(filename):
 @route('/css/<filename:re:.*\.css>')
 def send_css(filename):
     return static_file(filename, root='css')
-run(app=app)
+run(app=app, host='0.0.0.0', port=argv[1])
