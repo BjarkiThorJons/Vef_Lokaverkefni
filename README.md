@@ -1,6 +1,8 @@
 # Vef_Lokaverkefni
 Bjarki Þór Jónsson og Atli Óskarsson
 
+Myndband: https://www.youtube.com/watch?v=K9oNZqzqJ1Q
+
 Það sem verður á þessari síðu er karfa til að geyma allar vörur sem notandinn vill og ef sá er loggaðir inn þá er hægt að geyma allar vörurnar og ganga frá því seinna.
 Að logga inn leyfir þér að, geyma körfuna
 
