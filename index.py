@@ -27,7 +27,7 @@ def index():
 def logs():
     return template("templates_login/index.tpl")
 
-@route('/login' ,method="POST")
+@route('/login', method="POST")
 def login():
     cursor = db.cursor()
     cursor.execute("select * from notendur")
@@ -54,7 +54,8 @@ def login():
         cursor.execute("""insert into notendur(nafn,lykilord) values(%s,%s)""",(notendanafn,lykilord))
         db.commit()
         cursor.close()
-        redirect("/skjakort")
+        redirect("/")
+
     for x in users:
         if notendanafn==x and lykilord==users[x]:
             redirect("/skjakort")

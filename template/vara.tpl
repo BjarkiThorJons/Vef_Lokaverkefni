@@ -5,7 +5,7 @@
 	<title>{{posts["nafn"]}}</title>
 </head>
 <body>
-		% include('template/header.tpl')
+	% include('template/header.tpl')
 	<img src="myndir/{{posts['myndir']}}">
 	<h2>{{posts["nafn"]}}</h2>
 	<h2>Verð: {{posts["verð"]}}</h2>

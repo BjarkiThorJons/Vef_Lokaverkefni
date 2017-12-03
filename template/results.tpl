@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<title>Leita</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
 	% include('template/header.tpl')

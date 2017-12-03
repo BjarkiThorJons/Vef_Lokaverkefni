@@ -13,6 +13,5 @@
 		<p>Verð: {{ x["verð"] }}</p>
 	%end
 
-
 </body>
 </html>
