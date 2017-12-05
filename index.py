@@ -18,50 +18,7 @@ for i in range(numrows):
     row=cursor.fetchone()
     if row:
         users[row[0]]=row[1]
-@route("/")
-def index():
-    return template("template/index.tpl", posts=vorur)
 
-
-@route("/coolkrakki")
-def logs():
-    return template("templates_login/index.tpl")
-
-@route('/login', method="POST")
-def login():
-    cursor = db.cursor()
-    cursor.execute("select * from notendur")
-    numrows = int(cursor.rowcount)
-    users = {}
-    for i in range(numrows):
-        row = cursor.fetchone()
-        if row:
-            users[row[0]] = row[1]
-    notendanafn=request.forms.get("notendanafn")
-    lykilord=request.forms.get("lykilord")
-    submit=request.forms.get("submit")
-    if notendanafn=="":
-        villa={"villa":"Vantar notendanafn"}
-        return template("templates_login/villa.tpl",villa)
-    elif lykilord=="":
-        villa={"villa":"Vantar lykilord"}
-        return template("templates_login/villa.tpl",villa)
-    elif submit=="Sign-up":
-        for x in users:
-            if notendanafn == x:
-                villa={"villa":"Notendanafn í notkun"}
-                return template("templates_login/villa.tpl",villa)
-        cursor.execute("""insert into notendur(nafn,lykilord) values(%s,%s)""",(notendanafn,lykilord))
-        db.commit()
-        cursor.close()
-        redirect("/")
-
-    for x in users:
-        if notendanafn==x and lykilord==users[x]:
-            redirect("/skjakort")
-    else:
-        villa={"villa":"Notendanafn eða/og lykilorð rangt"}
-        return template("templates_login/villa.tpl",villa)
 
 cursor=db.cursor()
 cursor.execute("select * from vorur")
@@ -84,11 +41,61 @@ for i in range(numrows):
             link+=x.lower()
         vara["link"]=link
         vorur.append(vara)
-        '''vorur[row[0]] = vara'''
 
+@route("/")
+def index():
+    return template("template/index.tpl", posts=vorur)
+
+
+@route("/coolkrakki")
+def logs():
+    return template("templates_login/index.tpl")
+
+@route('/login', method="POST")
+def login():
+    cursor = db.cursor()
+    cursor.execute("select * from notendur")
+
+    numrows = int(cursor.rowcount)
+    users = {}
+    for i in range(numrows):
+        row = cursor.fetchone()
+        if row:
+            users[row[0]] = row[1]
+
+    notendanafn=request.forms.get("notendanafn")
+    lykilord=request.forms.get("lykilord")
+    submit=request.forms.get("submit")
+
+    if notendanafn=="":
+        villa={"villa":"Vantar notendanafn"}
+        return template("templates_login/villa.tpl",villa)
+
+    elif lykilord=="":
+        villa={"villa":"Vantar lykilord"}
+        return template("templates_login/villa.tpl",villa)
+
+    elif submit=="Sign-up":
+        for x in users:
+            if notendanafn == x:
+                villa={"villa":"Notendanafn í notkun"}
+                return template("templates_login/villa.tpl",villa)
+
+        cursor.execute("""insert into notendur(nafn,lykilord) values(%s,%s)""",(notendanafn,lykilord))
+        db.commit()
+        cursor.close()
+        redirect("/")
+
+    for x in users:
+        if notendanafn==x and lykilord==users[x]:
+            redirect("/skjakort")
+    else:
+        villa={"villa":"Notendanafn eða/og lykilorð rangt"}
+        return template("templates_login/villa.tpl",villa)
 
 @route("/skjakort")
 def filter():
+
     val = []
     for x in vorur:
         if x["hopur"] == "skjakort":
@@ -97,6 +104,7 @@ def filter():
 
 @route("/turnkassar")
 def skjakort():
+    
     val = []
     for x in vorur:
         if x["hopur"] == "turnkassar":
@@ -145,22 +153,25 @@ def vara(vara):
 def d():
     session=request.environ.get('beaker.session')
     vara=request.forms.get("vara")
-    print(vara)
     fjoldi=request.forms.get('fjoldi')
+
     if int(fjoldi)<0:
         fjoldi=int(fjoldi)*-1
+
     session[vara]=session.get(vara,0)+int(fjoldi)
     session.save()
+
     for x in vorur:
-        if x["nafn"]==vara:
-            linkurinn=x["link"]
-    link="/"+linkurinn
-    redirect(link)
+        if x["nafn"] == vara:
+            linkurinn = x["link"]
+
+    redirect("/{item}".format(item = linkurinn))
 
 @route('/karfa', method="POST")
 def karfa():
     session = request.environ.get('beaker.session')
     karfan = []
+
     for x in session:
         for y in vorur:
             if x==y["nafn"]:
@@ -168,6 +179,7 @@ def karfa():
                 verd=session[x]*y["verð"]
                 hlutur[x] = {"fjoldi":session[x],"verd":verd}
                 karfan.append(hlutur)
+
     for x in karfan:
         for y in x:
             print(x[y]["verd"])
@@ -181,4 +193,5 @@ def server_static(filename):
 @route('/css/<filename:re:.*\.css>')
 def send_css(filename):
     return static_file(filename, root='css')
+
 run(app=app, host='0.0.0.0', port=argv[1])
