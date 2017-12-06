@@ -88,10 +88,11 @@ def login():
 
     for x in users:
         if notendanafn==x and lykilord==users[x]:
-            redirect("/skjakort")
+            redirect("/")
     else:
         villa={"villa":"Notendanafn eða/og lykilorð rangt"}
         return template("templates_login/villa.tpl",villa)
+
 
 @route("/skjakort")
 def filter():
@@ -138,6 +139,7 @@ def check():
         if ord.lower() in x["nafn"].lower():
             leita.append(x)
 
+        # Ef það er skrifað nafn á hópi(t.d. skjakort) þá fer það á sú síðu
         if ord.lower() == x["hopur"]:
             return redirect("/{result}".format(result = x["hopur"]))
 
