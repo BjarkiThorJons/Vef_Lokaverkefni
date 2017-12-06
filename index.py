@@ -158,9 +158,10 @@ def d():
     if int(fjoldi)<0:
         fjoldi=int(fjoldi)*-1
 
+    #Forritið setur vöruna sem notandi valdi í session
     session[vara]=session.get(vara,0)+int(fjoldi)
     session.save()
-
+    
     for x in vorur:
         if x["nafn"] == vara:
             linkurinn = x["link"]
@@ -171,11 +172,13 @@ def d():
 def karfa():
     session = request.environ.get('beaker.session')
     karfan = []
-
+    #Forritið fer í gegnum session
     for x in session:
         for y in vorur:
+            #Forritið fynnur allar vörur með nafni sem eru í session og setur vörurnar í körfu
             if x==y["nafn"]:
                 hlutur = {}
+                #Vörurnar eru geymdar sem dictionary í session, fjöldi er value og nafn key
                 verd=session[x]*y["verð"]
                 hlutur[x] = {"fjoldi":session[x],"verd":verd}
                 karfan.append(hlutur)
